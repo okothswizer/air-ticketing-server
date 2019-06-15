@@ -16,11 +16,7 @@ app.get("/api/flight", (req, res) => {
             {
                 res . Json(rows);
 
-
         app.listen(3306, () => console.log("App listening on port 3306"));
-
-
-
 
 
 app.listen(9000, () => console.log("App listening on port 9000"));
