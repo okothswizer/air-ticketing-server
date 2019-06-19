@@ -8,6 +8,7 @@ const pool = mysql.createPool({
     user: "foo",
     password: "password",
     database: "air-ticketing"
+
 });
 app.get("/api/flight", (req, res) => {
     pool.query("SELECT id, arrival time FROM flight", (error, rows) => {
@@ -17,7 +18,18 @@ app.get("/api/flight", (req, res) => {
         res.json(rows);
     });
 });
-
+app.get("/api/flight/:id",(req, res) => {
+    pool.query(
+        "SELECT id, name FROM flight WHERE id = ?",
+        [req.params.id],
+        (error, row) => {
+            if(error) {
+                return res.status?(500).json({ error });
+            }
+            res.json(row);
+        }
+    )
+})
 app.listen(9000, () => {
     console.log("App running on port 9000");
 });
