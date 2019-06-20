@@ -33,6 +33,6 @@ app.get("/api/flight/:id", (req, res) => {
      });
     
 
-app.listen(9000, () => {
-    console.log("App running on port 9000");
+app.listen(3306, () => {
+    console.log("App running on port 3306");
 });
