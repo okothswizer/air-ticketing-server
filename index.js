@@ -20,7 +20,7 @@ app.get("/api/flight", (req, res) => {
 });
 app.get("/api/flight/:id", (req, res) => {
          pool.query(
-             "SELECT id, name FROM flight WHERE id = ?",
+             "SELECT id, name FROM johnson WHERE id = ?",
             [req.params.id],
             (error, rows) => {
                 if (error) {
@@ -31,7 +31,17 @@ app.get("/api/flight/:id", (req, res) => {
             }
          );
      });
-    
+    [
+        {
+            "id": 1,
+            "name": "johnson"
+
+        },
+    {
+        "id": 2,
+        "name": "samson"
+    }
+]
 
 app.listen(3306, () => {
     console.log("App running on port 3306");
