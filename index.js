@@ -46,3 +46,10 @@ app.get("/api/flight/:id", (req, res) => {
 app.listen(3306, () => {
     console.log("App running on port 3306");
 });
+
+const express = require("express");
+const app = express();
+
+ app.get("/", (req, res) => res.json({ message: "Hello World!" }));
+
+app.listen(3306, () => console.log("App listening on port 3306"));
