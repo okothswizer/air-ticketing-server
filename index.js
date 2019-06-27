@@ -11,14 +11,14 @@ const pool = mysql.createPool({
 
 });
 app.get("/api/customer", (req, res) => {
-    pool.query("SELECT id, arrival time FROM customer", (error, rows) => {
+    pool.query("SELECT id, name FROM customer", (error, rows) => {
         if (error) {
             return res.status(500).json({ error });
         }
         res.json(rows);
     });
 });
-app.get("/api/flight/:id", (req, res) => {
+app.get("/api/customer/:id", (req, res) => {
          pool.query(
              "SELECT id, name FROM johnson WHERE id = ?",
             [req.params.id],
