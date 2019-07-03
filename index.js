@@ -21,7 +21,7 @@ app.get("/api/customer", (req, res) => {
 app.get("/api/customer/:id", (req, res) => {
          pool.query(
              "SELECT id, name FROM customer WHERE id = ?",
-             
+
             [req.params.id],
             (error, rows) => {
                 if (error) {
@@ -33,7 +33,16 @@ app.get("/api/customer/:id", (req, res) => {
          );
      });
     
+ app.get ("/api/cinemas/:id/movies",) (req, res ) =>{
+     pool.query(
+         'SELECT flight,id, departure, flight_number, departure_time,arrival,arrival_time,destination, FROM flight
+        JOIN ', 
+         
 
+         
+         
+     )
+ }  
 
 
 
