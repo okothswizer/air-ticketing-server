@@ -33,17 +33,45 @@ app.get("/api/customer/:id", (req, res) => {
          );
      });
     
- app.get ("/api/cinemas/:id/movies",) (req, res ) =>{
+    app.get("/api/flight/:id", (req, res) => {
+             pool.query(
+            " SELECT id, flight_number,departure, destination FROM flight WHERE id = ?",
+    
+                [req.params.id],
+                (error, rows) => {
+                    if (error) {
+                        return res.status(500).json({ error });
+                     }
+        
+                     res.json(rows);
+                }
+             );
+         });
+ 
+ app.get("/api/flight/:id",(req, res)=>{
      pool.query(
-         'SELECT flight,id, departure, flight_number, departure_time,arrival,arrival_time,destination, FROM flight
-        JOIN ', 
+         "SELECT id, departure, destination FROM flight WHERE id= ?",
+         [req.params.id],
+         (error, rows) => {
+             if (error) {
+                 return res.status(500).json({error});
+                
+             }
+             res.json(rows);
+         })
+ })    
+        
+ app.put("/api/flight/:id",(req, res)=>{
+    pool.query(
+        "SELECT id, departure, destination FROM flight WHERE id= ?",
+        [req.params.id],
+        (error, rows) => {
+            if (error) {
+                return res.status(500).json({error});
+               
+            }
+            res.json(rows);
+        })
+})    
          
-
-         
-         
-     )
- }  
-
-
-
 app.listen(9000, () => console.log("App listening on port 9000"));
