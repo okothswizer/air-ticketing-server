@@ -33,9 +33,9 @@ app.get("/api/customer/:id", (req, res) => {
                     return res.status(500).json({ error });
                  }
     
-                 res.json(rows);
-            }
-         );
+              res.json(rows);
+                }
+         );             
      });
     
     app.get("/api/flight/:id", (req, res) => {
@@ -114,15 +114,16 @@ app.post("/api/customer/:Id", (req, res) => {
     )
 })
 
+
 app.post("/api/flight_ticket_number/:Id", (req, res) => {
     const flight_ticket_number = req.body;
-    if (!flight_ticket_number.name) {
+    if (!flight_ticket_number.ticket_number) {
         return res.status(400).json({ error: "invalid payload"});
     }
 
     pool.query(
         "INSERT INTO flight_ticket_number ( ticket_number) VALUE (?)",
-        [flight_ticket_number.name],
+        [flight_ticket_number.ticket_number],
         (error, results) => {
             if (error) {
                 return res.status(500).json({error});
@@ -132,6 +133,24 @@ app.post("/api/flight_ticket_number/:Id", (req, res) => {
     )
 })
 
-
+app.put("/api/customer/:id", (req, res) => {
+         const customer = req.body;
+    
+         if (!customer.name) {
+             return res.status(400).json({ error: "Invalid payload" });
+         }
+    
+         pool.query(
+             "UPDATE customer SET name = ? WHERE id = ?",
+             [customer.name, req.params.id],
+             (error, results) => {
+                 if (error) {
+                     return res.status(500).json({ error });
+                 }
+    
+                 res.json(results.changedRows);
+             }
+         );
+     });
 
 app.listen(9000, () => console.log("App listening on port 9000"));
