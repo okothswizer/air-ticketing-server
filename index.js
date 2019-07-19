@@ -153,4 +153,18 @@ app.put("/api/customer/:id", (req, res) => {
          );
      });
 
+     app.delete("/api/customer/:id", (req, res) => {
+             pool.query(
+                 "DELETE FROM customer WHERE id = ?",
+                 [req.params.id],
+                 (error, results) => {
+                     if (error) {
+                         return res.status(500).json({ error });
+                     }
+        
+                     res.json(results.affectedRows);
+                 }
+             );
+         });
+         
 app.listen(9000, () => console.log("App listening on port 9000"));
