@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import flight from "./flight";
-
+import loading from "./loading";
+import Error from "./Error";
 class flightList extends React.Component {
     constructor(props) {
         super(props);
@@ -38,9 +39,16 @@ class flightList extends React.Component {
                  }
             
                   render() {
-                      const { flightpayment } = this.state;
-            
-                      return (
+                      const{flightpayment,loading,error}= this.state;
+
+                      if (loading) {
+
+                      }
+                      if (error) {
+                          return<Error />;
+                      }
+                      
+                          return (
                           <div className="mvls-container">
                               <div className="mvls-flight-list">
                                   {flightpayment.map(m => (
