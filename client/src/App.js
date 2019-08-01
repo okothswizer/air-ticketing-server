@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import FlightList from "./FlightList";
+import flightList from "./flightList";
 import "./App.css";
 
 
