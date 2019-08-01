@@ -1,7 +1,6 @@
 import React from "react";
 import flight from "./flight";
 
-function flightList({ flightpayment }) {
     return (
         <div className="mvls-container">
             <div className="mvls-flight-list">
