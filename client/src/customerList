@@ -1,0 +1,11 @@
+import React from "react";
+
+function customerList() {
+    return (
+        <div>
+            <h1>customer List</h1>
+        </div>
+    );
+}
+
+export default customerList;

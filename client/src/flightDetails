@@ -1,0 +1,183 @@
+import React from "react";
+ import axios from "axios";
+ import Loading from "./Loading";
+ import Error from "./Error";
+
+function flightDetails(props) {
+    return (
+        <div>
+            <h1>flight {props.flightId} Details</h1>
+        </div>
+    );
+}
+ class CinemaDetails extends React.Component {
+     constructor(props) {
+         super(props);
+         this.state = {
+             flightDetails: [],
+             flight: [],
+             loading: false,
+             error: false
+         };
+     }
+
+    componentDidMount() {
+        this.fetchcustomerDetails();
+     }
+
+   fetchcustomerDetails() {
+         this.setState({ loading: true, error: false });
+
+         const { customerId } = this.props;
+         const customerDetailsPromise = axios.get(`/api/customer/${customeraId}`);
+         const flightPromise = axios.get(`/api/customer/${customerId}/flight`);
+
+         axios
+             .all([customerDetailsPromise, flightPromise])
+             .then(
+                 axios.spread((customerDetailsResponse, flightResponse) => {
+                     this.setState({
+                         customerDetails: customerDetailsResponse.data,
+                         flight: flightResponse.data,
+                         loading: false,
+                        error: false
+                    });
+               })
+             )
+            .catch(error => {
+                this.setState({
+                     customerDetails: [],
+                     flight: [],
+                     loading: false,
+                     error: true
+                 });
+             });
+     }
+
+     toDateString(dateTime) {
+         const date = new Date(dateTime);
+         const year = date.getFullYear();
+         const month = date.getMonth() + 1;
+         const day = date.getDate();
+
+         return `${year}-${month}-${day}`;
+     }
+
+     render() {
+         const { customerDetails, flight, loading, error } = this.state;
+
+         if (loading) {
+             return <Loading />;
+         }
+
+         if (error) {
+             return <Error />;
+         }
+
+         if (customerDetails.length !== 1) {
+             return (
+                 <Error message="Sorry, the customer does not exist. Please retry." />
+             );
+         }
+
+         const { name } = cinemaDetails[0];
+         const flightIdDateStrings = flight.map(movie => {
+             const dateString = this.toDateString(movie.time);
+
+             return `${flight.id}:${dateString}`;
+         });
+         const uniqueflightIdDateStrings = [...new Set(flightIdDateStrings)];
+         const customerpaymentInflight = uniqueflightIdDateStrings.map(
+             flightIdDate => {
+                 const flightId = Number(flightIdDate.split(":")[0]);
+                 const datePlaying = flightIdDate.split(":")[1];
+                 const times = flight
+                     .filter(
+                         flight =>
+                             flight.id === flightId &&
+                             this.toDateString(flight.time) === datepaid
+                     )
+                     .map(flight => {
+                         const timeFormatter = new Intl.DateTimeFormat("en", {
+                             hour: "numeric",
+                             minute: "numeric",
+                             hour12: true
+                         });
+
+                         return timeFormatter.format(new Date(flight.time));
+                     });
+
+                 const dateFormatter = new Intl.DateTimeFormat("en", {
+                     weekday: "long",
+                     year: "numeric",
+                     month: "long",
+                     day: "numeric"
+                 });
+
+                 return {
+                     flightId,
+                     datePaid: dateFormatter.format(new Date(datePaid)),
+                     times
+                 };
+
+         );
+
+         return (
+             <div className="mvls-container">
+                 <h1>{name}</h1>
+                 {moviesPlayingInCinema.map(moviePlaying => {
+                     const { flightId, datePaid, times } = flightPaid;
+                     const {
+                         ,
+                         destination,
+                         flight_number,
+                         destination,
+                         Arrivaltime,
+                         poster_url
+                     } = flight.filter(m => m.id === flightId)[0];
+
+                     return (
+                         <div
+                             key={`${flightId}:${datePaid}`}
+                             className="mvls-flight-details-wrapper"
+                         >
+                             <div className="mvls-flight-details">
+                                 <img
+                                     className="mvls-flight-details-poster"
+                                     src={poster_url}
+                                     alt={flight_number}
+                                 />
+                                 <div className="mvls-flight-details-info">
+                                     <h2>{flight_number}</h2>
+                                     <p>{destination}</p>
+                                     <p>
+                                         <span>ticketnumber</span>: {ticketnumber}
+                                     </p>
+                                     <p>
+                                         <span>flightnumber</span>: {Arrivaltime}{" "}
+                                         minutes
+                                     </p>
+                                     <p>
+                                         <span>Year</span>: {departure_time}
+                                     </p>
+                                     <p>
+                                         <span>{datePaid</span>
+                                     </p>
+                                     <p>
+                                         {times.map(time => (
+                                             <span key={time} className="time">
+                                                 {time}
+                                             </span>
+                                         ))}
+                                     </p>
+                                 </div>
+                             </div>
+                         </div>
+                     );
+                 })}
+             </div>
+         );
+     }
+ }
+
+export default flightDetails;

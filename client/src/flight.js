@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 function flight({ flightpayment }) {
     const { id, departure, flight_number, poster_url, departure_time,Flight_number,Destination } = flightpayment;
@@ -8,11 +9,15 @@ function flight({ flightpayment }) {
             <img className="mvls-poster" src={poster_url} alt={flight_number} />
             <div className="mvls-flihgt-body">
                 <div className="mvls-flight">{flight_number}</div>
+                <div className="mvls-flight">{departure}</div>
+                <div className="mvls-flight">{departure_time}></div>
+                <div className="mvls-flight">{Flight_number}></div>
+                <div className="mvls-flight">{Destination}</div>
             </div>
             <div className="mvls-flight-footer">
-                <a href={`/flight/${id}`} className="mvls-btn mvls-btn-flights">
-                    See customerText
-                </a>
+            <Link to={`/flight/${id}`} className="mvls-btn mvls-btn-customer">
+                    See customer
+                 </Link>
             </div>
         </div>
     );
