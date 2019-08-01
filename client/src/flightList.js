@@ -20,7 +20,7 @@ class flightList extends React.Component {
                      this.setState({ loading: true, error: false });
             
                      axios
-                         .get("http://localhost:9000/api/flightpayment")
+                     .get("/api/flightpayment")
                          .then(response => {
                              this.setState({
                                  fligtpayment: response.data,
