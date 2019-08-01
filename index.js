@@ -396,16 +396,16 @@ app.put("/api/flight/:id", (req, res) => {
              });
          });
         
-         app.post("/api/showtimes", (req, res) => {
-                 const { cinema_id, movie_id, time } = req.body;
+         app.post("/api/payment", (req, res) => {
+                 const { customer_id, cost } = req.body;
             
-                 if (!cinema_id || !movie_id || !time) {
+                 if (!customer_id ||  !cost ) {
                      return res.status(400).json({ error: "Invalid payload" });
                  }
             
                  pool.query(
-                     "INSERT INTO showtime (cinema_id, movie_id, time) VALUES (?, ?, ?)",
-                     [cinema_id, movie_id, time],
+                     "INSERT INTO payment (customer_id, cost) VALUES (?, ?)",
+                     [custom_id, cost],
                      (error, results) => {
                          if (error) {
                              return res.status(500).json({ error });
